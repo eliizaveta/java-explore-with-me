@@ -11,10 +11,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EndpointHit {
-	private int id;
-	private String app;
-	private String uri;
-	private String ip;
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private LocalDateTime timestamp;
+    private int id;
+    private String app;
+    private String uri;
+    private String ip;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime timestamp;
 }

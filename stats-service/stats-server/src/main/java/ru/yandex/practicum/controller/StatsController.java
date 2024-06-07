@@ -4,12 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.dto.EndpointHit;
 import ru.yandex.practicum.dto.ViewStats;
 import ru.yandex.practicum.error.exceptions.ValidationException;
@@ -25,24 +20,24 @@ import static ru.yandex.practicum.util.Constants.END_BEFORE_START;
 @RestController
 @RequiredArgsConstructor
 public class StatsController {
-	private final StatsService service;
+    private final StatsService service;
 
-	@PostMapping("/hit")
-	@ResponseStatus(HttpStatus.CREATED)
-	public EndpointHit addStat(@RequestBody EndpointHit endpointHit) {
-		log.info("Response from POST request on /hit");
-		return service.addStat(endpointHit);
-	}
+    @PostMapping("/hit")
+    @ResponseStatus(HttpStatus.CREATED)
+    public EndpointHit addStat(@RequestBody EndpointHit endpointHit) {
+        log.info("Response from POST request on /hit");
+        return service.addStat(endpointHit);
+    }
 
-	@GetMapping("/stats")
-	@ResponseStatus(HttpStatus.OK)
-	public List<ViewStats> getStats(
-			@RequestParam @DateTimeFormat(pattern = DATE_FORMAT) LocalDateTime start,
-			@RequestParam @DateTimeFormat(pattern = DATE_FORMAT) LocalDateTime end,
-			@RequestParam(required = false) List<String> uris,
-			@RequestParam(defaultValue = "false") boolean unique) {
-		log.info("Response from GET request on /stats");
-		if (start.isAfter(end)) throw new ValidationException(END_BEFORE_START);
-		return service.getStats(start, end, uris, unique);
-	}
+    @GetMapping("/stats")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ViewStats> getStats(
+            @RequestParam @DateTimeFormat(pattern = DATE_FORMAT) LocalDateTime start,
+            @RequestParam @DateTimeFormat(pattern = DATE_FORMAT) LocalDateTime end,
+            @RequestParam(required = false) List<String> uris,
+            @RequestParam(defaultValue = "false") boolean unique) {
+        log.info("Response from GET request on /stats");
+        if (start.isAfter(end)) throw new ValidationException(END_BEFORE_START);
+        return service.getStats(start, end, uris, unique);
+    }
 }

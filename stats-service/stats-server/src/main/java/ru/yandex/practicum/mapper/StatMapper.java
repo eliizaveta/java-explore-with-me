@@ -6,7 +6,7 @@ import ru.yandex.practicum.model.Stat;
 
 @Mapper(componentModel = "spring")
 public interface StatMapper {
-	Stat toStat(EndpointHit endpointHit);
+    Stat toStat(EndpointHit endpointHit);
 
-	EndpointHit toEndpointHit(Stat stat);
+    EndpointHit toEndpointHit(Stat stat);
 }
