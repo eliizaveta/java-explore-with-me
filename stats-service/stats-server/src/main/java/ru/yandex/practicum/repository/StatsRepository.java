@@ -2,14 +2,12 @@ package ru.yandex.practicum.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 import ru.yandex.practicum.dto.ViewStats;
 import ru.yandex.practicum.model.Stat;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Repository
 public interface StatsRepository extends JpaRepository<Stat, Long> {
     @Query("SELECT new ru.yandex.practicum.dto.ViewStats(s.app, s.uri, COUNT(s.uri)) " +
             "FROM Stat s " +
