@@ -1,6 +1,9 @@
 package ru.yandex.practicum.event.mapper;
 
-import org.mapstruct.*;
+import org.mapstruct.DecoratedWith;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Named;
 import ru.yandex.practicum.category.model.Category;
 import ru.yandex.practicum.event.dto.FullEventDTO;
 import ru.yandex.practicum.event.dto.NewEventDTO;
@@ -14,6 +17,12 @@ import java.util.Set;
 @Mapper(componentModel = "spring")
 public interface EventMapper {
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "createdOn", ignore = true)
+    @Mapping(target = "publishedOn", ignore = true)
+    @Mapping(target = "initiator", ignore = true)
+    @Mapping(target = "state", ignore = true)
+    @Mapping(target = "views", ignore = true)
+    @Mapping(target = "confirmedRequests", ignore = true)
     @Mapping(source = "category", target = "category")
     Event toEvent(NewEventDTO newEventDTO, Category category);
 
